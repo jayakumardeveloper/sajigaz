@@ -36,18 +36,18 @@ const products = [
     price: 599,
     image: 'https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60',
   },
-  // {
-  //   id: 7,
-  //   name: 'Aromatic Candle Collection',
-  //   price: 899,
-  //   image: 'https://images.unsplash.com/photo-1602874801007-bd458fc1d317?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60',
-  // },
-  // {
-  //   id: 8,
-  //   name: 'Teddy Bear & Treats',
-  //   price: 1299,
-  //   image: 'https://images.unsplash.com/photo-1559479083-d3b131e50080?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60',
-  // },
+  {
+    id: 7,
+    name: 'Aromatic Candle Collection',
+    price: 899,
+    image: 'https://images.unsplash.com/photo-1602874801007-bd458fc1d317?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60',
+  },
+  {
+    id: 8,
+    name: 'Teddy Bear & Treats',
+    price: 1299,
+    image: 'https://images.unsplash.com/photo-1559479083-d3b131e50080?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60',
+  },
 ];
 
 // State: Cart
@@ -75,11 +75,9 @@ const mobileToggle = document.getElementById('mobile-toggle');
 const navLinks = document.getElementById('nav-links');
 
 // Mobile Menu Toggle
-if (mobileToggle) {
-  mobileToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-  });
-}
+mobileToggle.addEventListener('click', () => {
+  navLinks.classList.toggle('active');
+});
 
 // Offcanvas Handlers
 function openCart() {
@@ -114,16 +112,15 @@ document.addEventListener('keydown', (e) => {
 function init() {
   renderProducts();
   loadCart();
-  initSwiper();
+  initCarousel();
 }
 
 // Render Products
 function renderProducts() {
-  if (!productsContainer) return;
   productsContainer.innerHTML = '';
   products.forEach((product, index) => {
     const card = document.createElement('div');
-    card.className = 'product-card swiper-slide animate__animated animate__fadeInUp';
+    card.className = 'product-card animate__animated animate__fadeInUp';
     card.style.animationDelay = `${index * 0.1}s`;
 
     card.innerHTML = `
@@ -135,39 +132,117 @@ function renderProducts() {
             </button>
         `;
     productsContainer.appendChild(card);
-    observer.observe(card);
   });
 }
 
-// Swiper Initialization
-function initSwiper() {
-  new Swiper('.mySwiper', {
-    slidesPerView: 1,
-    spaceBetween: 20,
-    loop: true,
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false,
-    },
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: true,
-    },
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    },
-    breakpoints: {
-      768: {
-        slidesPerView: 2,
-        spaceBetween: 30,
-      },
-      1024: {
-        slidesPerView: 3,
-        spaceBetween: 30,
-      },
-    },
+// Carousel Functionality
+let currentCarouselIndex = 0;
+let itemsPerPage = 3;
+
+function getResponsiveItemsPerPage() {
+  const width = window.innerWidth;
+  if (width < 768) {
+    return 1; // Mobile
+  } else if (width < 1024) {
+    return 2; // Tablet
+  }
+  return 3; // Desktop
+}
+
+function initCarousel() {
+  itemsPerPage = getResponsiveItemsPerPage();
+  currentCarouselIndex = 0;
+  createCarouselDots();
+  const prevBtn = document.getElementById('carousel-prev');
+  const nextBtn = document.getElementById('carousel-next');
+
+  prevBtn.addEventListener('click', previousSlide);
+  nextBtn.addEventListener('click', nextSlide);
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') previousSlide();
+    if (e.key === 'ArrowRight') nextSlide();
   });
+
+  // Auto-scroll carousel (optional, comment out if not wanted)
+  //   setInterval(autoSlide, 5000); // Change slide every 5 seconds
+
+  // Handle window resize for responsive items per page
+  window.addEventListener('resize', () => {
+    const newItemsPerPage = getResponsiveItemsPerPage();
+    if (newItemsPerPage !== itemsPerPage) {
+      itemsPerPage = newItemsPerPage;
+      currentCarouselIndex = 0;
+      createCarouselDots();
+      updateCarousel();
+    }
+  });
+
+  updateCarousel();
+}
+
+function createCarouselDots() {
+  const dotsContainer = document.getElementById('carousel-dots');
+  dotsContainer.innerHTML = '';
+  const totalSlides = Math.ceil(products.length / itemsPerPage);
+
+  for (let i = 0; i < totalSlides; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'dot';
+    if (i === 0) dot.classList.add('active');
+    dot.addEventListener('click', () => goToSlide(i));
+    dotsContainer.appendChild(dot);
+  }
+}
+
+function updateCarousel() {
+  const grid = document.querySelector('.products-grid');
+  const cards = document.querySelectorAll('.product-card');
+
+  if (cards.length === 0) return;
+
+  // Calculate offset based on card width + gap
+  const cardWidth = cards[0].offsetWidth;
+  const gapWidth = 32; // 2rem = 32px
+  const slideWidth = (cardWidth + gapWidth) * itemsPerPage - gapWidth;
+  const offset = currentCarouselIndex * slideWidth;
+
+  grid.style.transform = `translateX(-${offset}px)`;
+
+  // Update active dot
+  document.querySelectorAll('.dot').forEach((dot, index) => {
+    dot.classList.remove('active');
+    if (index === currentCarouselIndex) dot.classList.add('active');
+  });
+}
+
+function nextSlide() {
+  const maxSlides = Math.ceil(products.length / itemsPerPage) - 1;
+  if (currentCarouselIndex < maxSlides) {
+    currentCarouselIndex++;
+  } else {
+    currentCarouselIndex = 0;
+  }
+  updateCarousel();
+}
+
+function previousSlide() {
+  if (currentCarouselIndex > 0) {
+    currentCarouselIndex--;
+  } else {
+    currentCarouselIndex = Math.ceil(products.length / itemsPerPage) - 1;
+  }
+  updateCarousel();
+}
+
+function goToSlide(index) {
+  currentCarouselIndex = index;
+  updateCarousel();
+}
+
+function autoSlide() {
+  nextSlide();
 }
 
 // Load Cart from sessionStorage
@@ -300,78 +375,74 @@ function triggerConfetti() {
 }
 
 // Checkout Form Submission
-if (checkoutForm) {
-  checkoutForm.addEventListener('submit', (e) => {
-    e.preventDefault();
+checkoutForm.addEventListener('submit', (e) => {
+  e.preventDefault();
 
-    if (cart.length === 0) {
-      alert('Your cart is empty! Add some gifts before ordering.');
-      return;
-    }
+  if (cart.length === 0) {
+    alert('Your cart is empty! Add some gifts before ordering.');
+    return;
+  }
 
-    const name = document.getElementById('cust-name').value.trim();
-    const phone = document.getElementById('cust-phone').value.trim();
-    const address = document.getElementById('cust-address').value.trim();
+  const name = document.getElementById('cust-name').value.trim();
+  const phone = document.getElementById('cust-phone').value.trim();
+  const address = document.getElementById('cust-address').value.trim();
 
-    let orderDetails = `*New Order from Sajigaz Gifts*\n\n`;
-    orderDetails += `*Customer Details:*\n`;
-    orderDetails += `Name: ${name}\n`;
-    orderDetails += `Phone: ${phone}\n`;
-    orderDetails += `Address: ${address}\n\n`;
+  let orderDetails = `*New Order from Sajigaz Gifts*\n\n`;
+  orderDetails += `*Customer Details:*\n`;
+  orderDetails += `Name: ${name}\n`;
+  orderDetails += `Phone: ${phone}\n`;
+  orderDetails += `Address: ${address}\n\n`;
 
-    orderDetails += `*Order Items:*\n`;
-    let totalPrice = 0;
+  orderDetails += `*Order Items:*\n`;
+  let totalPrice = 0;
 
-    cart.forEach((item) => {
-      const itemTotal = item.price * item.quantity;
-      totalPrice += itemTotal;
-      orderDetails += `- ${item.name} x${item.quantity} = ₹${itemTotal}\n`;
-    });
-
-    orderDetails += `\n*Total Amount: ₹${totalPrice}*\n`;
-    orderDetails += `\nThank you!`;
-
-    const encodedMessage = encodeURIComponent(orderDetails);
-    const whatsappUrl = `https://wa.me/+919566502152?text=${encodedMessage}`;
-
-    // Celebration!
-    triggerConfetti();
-    setTimeout(triggerConfetti, 500);
-
-    // Clear cart upon successful order preparation (optional, but good UX)
-    cart = [];
-    saveCart();
-    updateCartUI();
-    checkoutForm.reset();
-
-    // Redirect to WhatsApp
-    setTimeout(() => {
-      window.open(whatsappUrl, '_blank');
-    }, 1000);
+  cart.forEach((item) => {
+    const itemTotal = item.price * item.quantity;
+    totalPrice += itemTotal;
+    orderDetails += `- ${item.name} x${item.quantity} = ₹${itemTotal}\n`;
   });
-}
+
+  orderDetails += `\n*Total Amount: ₹${totalPrice}*\n`;
+  orderDetails += `\nThank you!`;
+
+  const encodedMessage = encodeURIComponent(orderDetails);
+  const whatsappUrl = `https://wa.me/+919994583875?text=${encodedMessage}`;
+
+  // Celebration!
+  triggerConfetti();
+  setTimeout(triggerConfetti, 500);
+
+  // Clear cart upon successful order preparation (optional, but good UX)
+  cart = [];
+  saveCart();
+  updateCartUI();
+  checkoutForm.reset();
+
+  // Redirect to WhatsApp
+  setTimeout(() => {
+    window.open(whatsappUrl, '_blank');
+  }, 1000);
+});
 
 // Scroll Animation and Move to Top Button
 const moveToTopBtn = document.getElementById('move-to-top-btn');
 
 // Show/Hide button on scroll
-if (moveToTopBtn) {
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 300) {
-      moveToTopBtn.classList.add('visible');
-    } else {
-      moveToTopBtn.classList.remove('visible');
-    }
-  });
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 300) {
+    moveToTopBtn.classList.add('visible');
+  } else {
+    moveToTopBtn.classList.remove('visible');
+  }
+});
 
-  // Smooth scroll to top
-  moveToTopBtn.addEventListener('click', () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
+// Smooth scroll to top
+moveToTopBtn.addEventListener('click', () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth',
   });
-}
+});
 
 // Intersection Observer for scroll animations
 const observerOptions = {
@@ -388,10 +459,10 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, observerOptions);
 
-// Observe all sections
-document.querySelectorAll('section').forEach((element) => {
+// Observe all sections and product cards
+document.querySelectorAll('section, .product-card').forEach((element) => {
   observer.observe(element);
 });
 
 // Run Init
-document.addEventListener('DOMContentLoaded', init);
+init();

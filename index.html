@@ -54,6 +54,9 @@
     <!-- Main Styles -->
     <link rel="stylesheet" href="./assets/css/style.css" />
 
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
     <!-- Structured Data (Local Business Schema) -->
     <script type="application/ld+json">
       {
@@ -125,22 +128,14 @@
     <!-- Products Section -->
     <section id="products" class="section">
       <h2 class="section-title">Exclusive Gifts</h2>
-      <div class="carousel-container">
-        <!-- //carousel-container class added for better styling and structure -->
-        <button class="carousel-btn carousel-prev" id="carousel-prev">
-          <i class="fa-solid fa-chevron-left"></i>
-        </button>
-        <div class="carousel-wrapper">
-          <div class="products-grid" id="products-container">
-            <!-- Products injected by JS -->
-          </div>
+      <!-- Swiper -->
+      <div class="swiper mySwiper">
+        <div class="swiper-wrapper" id="products-container">
+          <!-- Products injected by JS -->
         </div>
-        <button class="carousel-btn carousel-next" id="carousel-next">
-          <i class="fa-solid fa-chevron-right"></i>
-        </button>
-      </div>
-      <div class="carousel-dots" id="carousel-dots">
-        <!-- Dots injected by JS -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-pagination"></div>
       </div>
     </section>
 
@@ -168,9 +163,9 @@
             <span id="cart-total-price">₹0</span>
           </div>
           <form id="checkout-form" class="checkout-form">
-            <input type="text" id="cust-name" placeholder="Full Name" required />
-            <input type="tel" id="cust-phone" placeholder="Phone Number" required />
-            <textarea id="cust-address" placeholder="Delivery Address" rows="3" required></textarea>
+            <input type="text" id="cust-name" name="name" autocomplete="name" placeholder="Full Name" required />
+            <input type="tel" id="cust-phone" name="phone" autocomplete="tel" placeholder="Phone Number" required />
+            <textarea id="cust-address" name="address" autocomplete="street-address" placeholder="Delivery Address" rows="3" required></textarea>
             <button type="submit" class="btn-primary checkout-btn">
               <i class="fa-brands fa-whatsapp"></i>
               Order via WhatsApp
@@ -243,6 +238,8 @@
 
     <!-- Confetti JS -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <!-- Script -->
     <script src="./assets/js/script.js"></script>
   </body>
