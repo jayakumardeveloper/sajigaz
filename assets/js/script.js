@@ -23,32 +23,31 @@ const products = [
     name: 'Personalized Mug Set',
     price: 599,
     image: 'https://images.unsplash.com/photo-1549007994-cb92caebd54b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60',
-  }
-//   },
-//   {
-//     id: 3,
-//     name: 'Festive Sparkle Gift Box',
-//     price: 1999,
-//     image: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60',
-//   },
-//   {
-//     id: 4,
-//     name: 'Personalized Mug Set',
-//     price: 599,
-//     image: 'https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60',
-//   },
-//   {
-//     id: 5,
-//     name: 'Aromatic Candle Collection',
-//     price: 899,
-//     image: 'https://images.unsplash.com/photo-1602874801007-bd458fc1d317?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60',
-//   },
-//   {
-//     id: 6,
-//     name: 'Teddy Bear & Treats',
-//     price: 1299,
-//     image: 'https://images.unsplash.com/photo-1559479083-d3b131e50080?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60',
-//   },
+  },
+  {
+    id: 5,
+    name: 'Festive Sparkle Gift Box',
+    price: 1999,
+    image: 'https://images.unsplash.com/photo-1549465220-1a8b9238cd48?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60',
+  },
+  {
+    id: 6,
+    name: 'Personalized Mug Set',
+    price: 599,
+    image: 'https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60',
+  },
+  {
+    id: 7,
+    name: 'Aromatic Candle Collection',
+    price: 899,
+    image: 'https://images.unsplash.com/photo-1602874801007-bd458fc1d317?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60',
+  },
+  {
+    id: 8,
+    name: 'Teddy Bear & Treats',
+    price: 1299,
+    image: 'https://images.unsplash.com/photo-1559479083-d3b131e50080?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60',
+  },
 ];
 
 // State: Cart
@@ -138,9 +137,21 @@ function renderProducts() {
 
 // Carousel Functionality
 let currentCarouselIndex = 0;
-const itemsPerPage = 3;
+let itemsPerPage = 3;
+
+function getResponsiveItemsPerPage() {
+  const width = window.innerWidth;
+  if (width < 768) {
+    return 1; // Mobile
+  } else if (width < 1024) {
+    return 2; // Tablet
+  }
+  return 3; // Desktop
+}
 
 function initCarousel() {
+  itemsPerPage = getResponsiveItemsPerPage();
+  currentCarouselIndex = 0;
   createCarouselDots();
   const prevBtn = document.getElementById('carousel-prev');
   const nextBtn = document.getElementById('carousel-next');
@@ -155,7 +166,18 @@ function initCarousel() {
   });
 
   // Auto-scroll carousel (optional, comment out if not wanted)
-//   setInterval(autoSlide, 5000); // Change slide every 5 seconds
+  //   setInterval(autoSlide, 5000); // Change slide every 5 seconds
+
+  // Handle window resize for responsive items per page
+  window.addEventListener('resize', () => {
+    const newItemsPerPage = getResponsiveItemsPerPage();
+    if (newItemsPerPage !== itemsPerPage) {
+      itemsPerPage = newItemsPerPage;
+      currentCarouselIndex = 0;
+      createCarouselDots();
+      updateCarousel();
+    }
+  });
 
   updateCarousel();
 }
