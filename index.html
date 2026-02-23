@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sajigaz Gifts & More</title>
+    <!-- Fonts -->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Clash+Display:wght@400;500;600;700&family=Fredoka:wght@300;400;500;600;700&family=Great+Vibes&family=Pacifico&family=Allura&family=Tangerine:wght@400;700&family=Dancing+Script:wght@400;500;600;700&family=Satisfy&family=Caveat:wght@600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" /> -->
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="./assets/css/all.min.css" />
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="./assets/css/animate.min.css" />
+    <!-- Styles -->
+    <link rel="stylesheet" href="./assets/css/style.css" />
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <nav id="navbar" class="sticky-nav">
+      <div class="nav-container">
+        <a href="/" class="logo animate__animated animate__pulse animate__infinite"><img src="./assets/img/product_logo.png" alt="sajigaz-gifts-logo" /> </a>
+        <button class="mobile-toggle" id="mobile-toggle">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <ul class="nav-links" id="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#products">Products</a></li>
+          <li><a href="#bulk-order">Bulk Order</a></li>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#contact">Contact Us</a></li>
+          <li>
+            <a href="#" class="cart-link" id="nav-cart-btn">
+              <i class="fa-solid fa-cart-shopping"></i> Cart
+              <span id="cart-count" class="cart-badge">0</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="home" class="hero">
+      <div class="hero-graphics animate__animated animate__zoomIn">
+        <div class="floating-gift"><i class="fa-solid fa-gift"></i></div>
+        <div class="floating-star"><i class="fa-solid fa-star"></i></div>
+        <div class="floating-heart"><i class="fa-solid fa-heart"></i></div>
+      </div>
+      <div class="hero-content animate__animated animate__fadeInUp">
+        <h1>Celebrate Every Moment</h1>
+        <p>Find the perfect gift for your loved ones with our premium, vibrant collection.</p>
+        <a href="#products" class="btn-primary">Shop Now</a>
+      </div>
+      <div class="hero-graphics animate__animated animate__zoomIn">
+        <div class="floating-gift"><i class="fa-solid fa-gift"></i></div>
+        <div class="floating-star"><i class="fa-solid fa-star"></i></div>
+        <div class="floating-heart"><i class="fa-solid fa-heart"></i></div>
+      </div>
+    </header>
+
+    <!-- Products Section -->
+    <section id="products" class="section">
+      <h2 class="section-title">Exclusive Gifts</h2>
+      <div class="carousel-container">
+        <!-- //carousel-container class added for better styling and structure -->
+        <button class="carousel-btn carousel-prev" id="carousel-prev">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <div class="carousel-wrapper">
+          <div class="products-grid" id="products-container">
+            <!-- Products injected by JS -->
+          </div>
+        </div>
+        <button class="carousel-btn carousel-next" id="carousel-next">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+      </div>
+      <div class="carousel-dots" id="carousel-dots">
+        <!-- Dots injected by JS -->
+      </div>
+    </section>
+
+    <!-- Bulk Order Section -->
+    <section id="bulk-order" class="section bg-light">
+      <h2 class="section-title">Bulk Orders</h2>
+      <div class="bulk-content">
+        <p>Planning a corporate event or a large celebration? We offer amazing discounts on bulk orders!</p>
+        <a href="#contact" class="btn-secondary">Get a Quote</a>
+      </div>
+    </section>
+
+    <!-- Cart & Checkout Section -->
+    <section id="cart-section" class="section">
+      <h2 class="section-title">Your Cart</h2>
+      <div class="cart-container">
+        <div class="cart-items" id="cart-items-container">
+          <!-- Cart items injected by JS -->
+          <p class="empty-cart-msg">Your cart is empty.</p>
+        </div>
+        <div class="checkout-panel">
+          <h3>Order Summary</h3>
+          <div class="cart-total">
+            <span>Total:</span>
+            <span id="cart-total-price">₹0</span>
+          </div>
+          <form id="checkout-form" class="checkout-form">
+            <input type="text" id="cust-name" placeholder="Full Name" required />
+            <input type="tel" id="cust-phone" placeholder="Phone Number" required />
+            <textarea id="cust-address" placeholder="Delivery Address" rows="3" required></textarea>
+            <button type="submit" class="btn-primary checkout-btn"><i class="fa-brands fa-whatsapp"></i> Order via WhatsApp</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section bg-light">
+      <h2 class="section-title">About Us</h2>
+      <p class="about-text">At Sajigaz Gifts, we believe every occasion deserves a touch of magic. Our premium collection is carefully curated to bring joy, smiles, and unforgettable memories to your loved ones.</p>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+      <h2 class="section-title">Contact Us</h2>
+      <div class="contact-info">
+        <p><i class="fa-solid fa-phone"></i> <a href="https://wa.me/919566502152" target="_blank">+919566502152</a></p>
+        <p><i class="fa-solid fa-envelope"></i> <a href="mailto:sajigazdesigns@gmail.com">sajigazdesigns@gmail.com</a></p>
+        <p><i class="fa-solid fa-globe"></i> <a href="https://sajigazdesigns.com.in" target="_blank">sajigazdesigns.com.in</a></p>
+        <p><i class="fa-solid fa-location-dot"></i> 7 - Bharathi nagar, old madras street, kottakuppam, puducherry - 605104</p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2026 Sajigaz Gifts. All rights reserved.</p>
+    </footer>
+
+    <!-- Offcanvas Cart -->
+    <div id="cart-overlay" class="cart-overlay"></div>
+    <div id="offcanvas-cart" class="offcanvas-cart">
+      <div class="offcanvas-header">
+        <h2>Your Cart</h2>
+        <button id="close-cart-btn" class="close-cart-btn"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="offcanvas-body" id="offcanvas-items-container">
+        <!-- Cart items injected here -->
+      </div>
+      <div class="offcanvas-footer">
+        <div class="offcanvas-subtotal">
+          <span>Subtotal:</span>
+          <span id="offcanvas-total-price">₹0</span>
+        </div>
+        <div class="offcanvas-actions">
+          <button id="continue-shopping-btn" class="btn-continue-shopping">Continue Shopping</button>
+          <a href="#cart-section" id="checkout-drawer-btn" class="btn-checkout-drawer">Checkout</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Move to Top Button -->
+    <button id="move-to-top-btn" class="move-to-top-btn" title="Move to top">
+      <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+    <!-- Confetti JS -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <!-- Script -->
+    <script src="./assets/js/script.js"></script>
+  </body>
+</html>
