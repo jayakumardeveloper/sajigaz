@@ -59,6 +59,7 @@ const cartItemsContainer = document.getElementById('cart-items-container');
 const cartCountElement = document.getElementById('cart-count');
 const cartTotalElement = document.getElementById('cart-total-price');
 const checkoutForm = document.getElementById('checkout-form');
+const contactForm = document.getElementById('contact-form');
 const emptyCartMsg = document.querySelector('.empty-cart-msg');
 
 // Offcanvas Elements
@@ -348,6 +349,30 @@ if (checkoutForm) {
     setTimeout(() => {
       window.open(whatsappUrl, '_blank');
     }, 1000);
+  });
+}
+
+// Contact Form Submission
+if (contactForm) {
+  contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById('contact-name').value.trim();
+    const phone = document.getElementById('contact-phone').value.trim();
+    const message = document.getElementById('contact-message').value.trim();
+
+    let msg = `*New Inquiry from Website*\n\n`;
+    msg += `Name: ${name}\n`;
+    msg += `Phone: ${phone}\n`;
+    msg += `Message: ${message}\n`;
+
+    const encoded = encodeURIComponent(msg);
+    const url = `https://wa.me/+919566502152?text=${encoded}`;
+
+    triggerConfetti();
+    contactForm.reset();
+
+    setTimeout(() => window.open(url, '_blank'), 1000);
   });
 }
 
