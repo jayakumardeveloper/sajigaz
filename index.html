@@ -1,24 +1,88 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <!-- Basic Meta -->
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sajigaz Gifts & More</title>
-    <!-- Fonts -->
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Clash+Display:wght@400;500;600;700&family=Fredoka:wght@300;400;500;600;700&family=Great+Vibes&family=Pacifico&family=Allura&family=Tangerine:wght@400;700&family=Dancing+Script:wght@400;500;600;700&family=Satisfy&family=Caveat:wght@600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" /> -->
-    <!-- Font Awesome CDN -->
+
+    <!-- Primary SEO -->
+    <title>Sajigaz Gifts & More | Custom Gifts & Personalized Designs in Puducherry</title>
+    <meta name="description" content="Sajigaz Gifts & More offers customized gifts, personalized designs, creative gift solutions, and unique handcrafted items in Puducherry. Contact us for premium gifting solutions." />
+    <meta name="keywords" content="Sajigaz Gifts, Custom Gifts Puducherry, Personalized Gifts, Gift Shop Kottakuppam, Corporate Gifts, Creative Gift Designs, Custom Printing, Unique Gifts India" />
+    <meta name="author" content="Sajigaz Gifts & More" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://jayakumardeveloper.github.io/sajigaz/" />
+
+    <!-- Open Graph (Facebook, LinkedIn) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Sajigaz Gifts & More | Custom Gifts & Personalized Designs" />
+    <meta property="og:description" content="Discover premium personalized gifts and creative custom designs in Puducherry. Quality gifting solutions for all occasions." />
+    <meta property="og:url" content="https://jayakumardeveloper.github.io/sajigaz/" />
+    <meta property="og:image" content="https://jayakumardeveloper.github.io/sajigaz/assets/img/product_logo.jpg" />
+    <meta property="og:site_name" content="Sajigaz Gifts & More" />
+    <meta property="og:locale" content="en_IN" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Sajigaz Gifts & More | Personalized Gifts in Puducherry" />
+    <meta name="twitter:description" content="Premium customized gifts, creative designs, and personalized gift solutions for every occasion." />
+    <meta name="twitter:image" content="https://jayakumardeveloper.github.io/sajigaz/assets/img/product_logo.jpg" />
+
+    <!-- Geo & Local SEO -->
+    <meta name="geo.region" content="IN-PY" />
+    <meta name="geo.placename" content="Puducherry" />
+    <meta name="geo.position" content="11.9341;79.8306" />
+    <meta name="ICBM" content="11.9341, 79.8306" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://jayakumardeveloper.github.io/sajigaz/assets/img/sajigaz-icon.ico" />
+
+    <!-- Performance Optimization -->
+    <link rel="preload" href="./assets/css/style.css" as="style" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="./assets/css/all.min.css" />
+
     <!-- Animate CSS -->
     <link rel="stylesheet" href="./assets/css/animate.min.css" />
-    <!-- Styles -->
+
+    <!-- Main Styles -->
     <link rel="stylesheet" href="./assets/css/style.css" />
+
+    <!-- Structured Data (Local Business Schema) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "GiftShop",
+        "name": "Sajigaz Gifts & More",
+        "image": "https://jayakumardeveloper.github.io/sajigaz/assets/img/product_logo.jpg",
+        "url": "https://jayakumardeveloper.github.io/sajigaz/",
+        "telephone": "+919566502152",
+        "email": "sajigazdesigns@gmail.com",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "7 Bharathi Nagar, Old Madras Street",
+          "addressLocality": "Kottakuppam",
+          "addressRegion": "Puducherry",
+          "postalCode": "605104",
+          "addressCountry": "IN"
+        },
+        "areaServed": "Puducherry",
+        "sameAs": ["https://jayakumardeveloper.github.io/sajigaz/"]
+      }
+    </script>
   </head>
 
   <body>
     <!-- Navbar -->
     <nav id="navbar" class="sticky-nav">
       <div class="nav-container">
-        <a href="/" class="logo animate__animated animate__pulse animate__infinite"><img src="./assets/img/product_logo.png" alt="sajigaz-gifts-logo" /> </a>
+        <a href="/" class="logo animate__animated animate__pulse animate__infinite"><img src="./assets/img/product_logo.png" alt="sajigaz-gifts-logo" /></a>
         <button class="mobile-toggle" id="mobile-toggle">
           <i class="fa-solid fa-bars"></i>
         </button>
@@ -30,7 +94,8 @@
           <li><a href="#contact">Contact Us</a></li>
           <li>
             <a href="#" class="cart-link" id="nav-cart-btn">
-              <i class="fa-solid fa-cart-shopping"></i> Cart
+              <i class="fa-solid fa-cart-shopping"></i>
+              Cart
               <span id="cart-count" class="cart-badge">0</span>
             </a>
           </li>
@@ -106,7 +171,10 @@
             <input type="text" id="cust-name" placeholder="Full Name" required />
             <input type="tel" id="cust-phone" placeholder="Phone Number" required />
             <textarea id="cust-address" placeholder="Delivery Address" rows="3" required></textarea>
-            <button type="submit" class="btn-primary checkout-btn"><i class="fa-brands fa-whatsapp"></i> Order via WhatsApp</button>
+            <button type="submit" class="btn-primary checkout-btn">
+              <i class="fa-brands fa-whatsapp"></i>
+              Order via WhatsApp
+            </button>
           </form>
         </div>
       </div>
@@ -122,10 +190,22 @@
     <section id="contact" class="section">
       <h2 class="section-title">Contact Us</h2>
       <div class="contact-info">
-        <p><i class="fa-solid fa-phone"></i> <a href="https://wa.me/919566502152" target="_blank">+919566502152</a></p>
-        <p><i class="fa-solid fa-envelope"></i> <a href="mailto:sajigazdesigns@gmail.com">sajigazdesigns@gmail.com</a></p>
-        <p><i class="fa-solid fa-globe"></i> <a href="https://sajigazdesigns.com.in" target="_blank">sajigazdesigns.com.in</a></p>
-        <p><i class="fa-solid fa-location-dot"></i> 7 - Bharathi nagar, old madras street, kottakuppam, puducherry - 605104</p>
+        <p>
+          <i class="fa-solid fa-phone"></i>
+          <a href="https://wa.me/919566502152" target="_blank">+919566502152</a>
+        </p>
+        <p>
+          <i class="fa-solid fa-envelope"></i>
+          <a href="mailto:sajigazdesigns@gmail.com">sajigazdesigns@gmail.com</a>
+        </p>
+        <p>
+          <i class="fa-solid fa-globe"></i>
+          <a href="https://sajigazdesigns.com.in" target="_blank">sajigazdesigns.com.in</a>
+        </p>
+        <p>
+          <i class="fa-solid fa-location-dot"></i>
+          7 - Bharathi nagar, old madras street, kottakuppam, puducherry - 605104
+        </p>
       </div>
     </section>
 
